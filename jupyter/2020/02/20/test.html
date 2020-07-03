@@ -99,7 +99,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      5 min read
+      6 min read
     
 </span></p>
 
@@ -186,6 +186,236 @@ window.onload = wrap_img;
     
     
 <div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>pip install pypng
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Collecting pypng
+  Downloading https://files.pythonhosted.org/packages/bc/fb/f719f1ac965e2101aa6ea6f54ef8b40f8fbb033f6ad07c017663467f5147/pypng-0.0.20.tar.gz (649kB)
+     |████████████████████████████████| 655kB 2.8MB/s 
+Building wheels for collected packages: pypng
+  Building wheel for pypng (setup.py) ... done
+  Created wheel for pypng: filename=pypng-0.0.20-cp36-none-any.whl size=67161 sha256=006a66b44bd233d6a40cc47b6738b755c4513aa7f8f1952d3cd06d802eea73b7
+  Stored in directory: /root/.cache/pip/wheels/41/6b/ef/0493b536b6d4722c2ae9486691b1d49b922b9877922beeabb3
+Successfully built pypng
+Installing collected packages: pypng
+Successfully installed pypng-0.0.20
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">png</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">io</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">png</span>
+<span class="k">def</span> <span class="nf">png_bytes</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">()</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span>
+    <span class="n">png</span><span class="o">.</span><span class="n">from_array</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span><span class="o">*</span><span class="mi">255</span><span class="p">,</span> <span class="s1">'L'</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">output</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">base64</span>
+<span class="n">dataurl</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">'data:image/png;base64,'</span><span class="o">+</span><span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">png_bytes</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">128</span><span class="p">)))</span>
+<span class="c1">#dataurl = b'"'+dataurl + b'"'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dataurl</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>b'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAAAAADmVT4XAAABzklEQVR4nMXbW1ICQRQE0bv/TbchCDJMv/tWpR8qP5UnDIVhOowo7EcUWBAFFkSBBfH+RAJIQVy+cABOELdvKAAliOq3DIARRPMBASAE0X3oB/gFt6BbcO+ZBZWcV1CrWQXVmFNQbxkFjZRP0CrZBM2QS9DumASdjEfQq1gE3YhD0G8YBIOEXjAqyAXDgFow3hcLJua1gpl1qWBqXCmY2xYKJqd1gtllmWB6WCWY3xUJFmY1gpVViWBpVCFY2xQIFifzBauL6YLlwWzB+l6yYGMuV7CzlirYGssU7G0lCjan8gS7S2mC7aEswf5OkuBgJkdwspIiOBrJEJxtJAgOJ84FpwvHAnwA/xniv0b4XxL+ZII/n+IvKfirKn5hgV9b4ZeX+BU2/iYDf5+Fv9XE323jNxzwey74bSf8zht+8xG//4rfgsbvwuMHEfhZDH4chZ/I4YeS+LksfjSNn86rAcOAHDAq6AGDhAHQbzgA3YgF0Kt4AJ2MCdDuuADNkA3QKvkAjZQRUG85AdWYFVCreQGVnBlw77kBt6Ad8F30A76SAODaJACXKAL4rDKAjywE+O9SgHcYA7zKHOAvDQKebRLwiKOA3zoLKPj/3pf4Ae2ZRDI2yuEZAAAAAElFTkSuQmCC'</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">altair</span> <span class="k">as</span> <span class="nn">alt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">source</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_records</span><span class="p">([</span>
+      <span class="p">{</span><span class="s2">"x"</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s2">"y"</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s2">"img"</span><span class="p">:</span> <span class="n">dataurl</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">)},</span>
+      <span class="p">{</span><span class="s2">"x"</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">,</span> <span class="s2">"y"</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">,</span> <span class="s2">"img"</span><span class="p">:</span> <span class="s2">"https://vega.github.io/vega-datasets/data/gimp.png"</span><span class="p">},</span>
+      <span class="p">{</span><span class="s2">"x"</span><span class="p">:</span> <span class="mf">2.5</span><span class="p">,</span> <span class="s2">"y"</span><span class="p">:</span> <span class="mf">2.5</span><span class="p">,</span> <span class="s2">"img"</span><span class="p">:</span> <span class="s2">"https://vega.github.io/vega-datasets/data/7zip.png"</span><span class="p">}</span>
+<span class="p">])</span>
+
+<span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">source</span><span class="p">)</span><span class="o">.</span><span class="n">mark_image</span><span class="p">(</span>
+    <span class="n">width</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">128</span>
+<span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="s1">'x'</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s1">'y'</span><span class="p">,</span>
+    <span class="n">url</span><span class="o">=</span><span class="s1">'img'</span>
+<span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+
+<div id="altair-viz-f8882605583b4a28b51cb00d212296bd"></div>
+<script type="text/javascript">
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-f8882605583b4a28b51cb00d212296bd") {
+      outputDiv = document.getElementById("altair-viz-f8882605583b4a28b51cb00d212296bd");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@4.8.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
+    };
+
+    function loadScript(lib) {
+      return new Promise(function(resolve, reject) {
+        var s = document.createElement('script');
+        s.src = paths[lib];
+        s.async = true;
+        s.onload = () => resolve(paths[lib]);
+        s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+        document.getElementsByTagName("head")[0].appendChild(s);
+      });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else if (typeof vegaEmbed === "function") {
+      displayChart(vegaEmbed);
+    } else {
+      loadScript("vega")
+        .then(() => loadScript("vega-lite"))
+        .then(() => loadScript("vega-embed"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-bd20a103d897013ef96f6eb7e80502a9"}, "mark": {"type": "image", "height": 128, "width": 128}, "encoding": {"url": {"type": "nominal", "field": "img"}, "x": {"type": "quantitative", "field": "x"}, "y": {"type": "quantitative", "field": "y"}}, "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json", "datasets": {"data-bd20a103d897013ef96f6eb7e80502a9": [{"x": 0.5, "y": 0.5, "img": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAAAAADmVT4XAAABzklEQVR4nMXbW1ICQRQE0bv/TbchCDJMv/tWpR8qP5UnDIVhOowo7EcUWBAFFkSBBfH+RAJIQVy+cABOELdvKAAliOq3DIARRPMBASAE0X3oB/gFt6BbcO+ZBZWcV1CrWQXVmFNQbxkFjZRP0CrZBM2QS9DumASdjEfQq1gE3YhD0G8YBIOEXjAqyAXDgFow3hcLJua1gpl1qWBqXCmY2xYKJqd1gtllmWB6WCWY3xUJFmY1gpVViWBpVCFY2xQIFifzBauL6YLlwWzB+l6yYGMuV7CzlirYGssU7G0lCjan8gS7S2mC7aEswf5OkuBgJkdwspIiOBrJEJxtJAgOJ84FpwvHAnwA/xniv0b4XxL+ZII/n+IvKfirKn5hgV9b4ZeX+BU2/iYDf5+Fv9XE323jNxzwey74bSf8zht+8xG//4rfgsbvwuMHEfhZDH4chZ/I4YeS+LksfjSNn86rAcOAHDAq6AGDhAHQbzgA3YgF0Kt4AJ2MCdDuuADNkA3QKvkAjZQRUG85AdWYFVCreQGVnBlw77kBt6Ad8F30A76SAODaJACXKAL4rDKAjywE+O9SgHcYA7zKHOAvDQKebRLwiKOA3zoLKPj/3pf4Ae2ZRDI2yuEZAAAAAElFTkSuQmCC"}, {"x": 1.5, "y": 1.5, "img": "https://vega.github.io/vega-datasets/data/gimp.png"}, {"x": 2.5, "y": 2.5, "img": "https://vega.github.io/vega-datasets/data/7zip.png"}]}}, {"mode": "vega-lite"});
+</script>
+</div>
+
+</div>
+
+</div>
+</div>
 
 </div>
     
